@@ -41,6 +41,7 @@ import os
 import tarfile
 import tensorflow as tf
 import requests
+from tensorflow.keras.layers import LSTM 
 
 st.set_page_config(
     page_title="ESP Gas Lock Detection",
@@ -117,7 +118,11 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
-    model_path = "my_models.h5" 
+    #model_path = "my_models.h5" 
+    #new_model = tf.keras.models.load_model(model_path)
+
+    tf.keras.utils.get_custom_objects().update({"LSTM": LSTM})
+    model_path = "my_models.h5"
     new_model = tf.keras.models.load_model(model_path)
 
     #DATASET BARU

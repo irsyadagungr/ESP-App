@@ -37,6 +37,11 @@ import tensorflow as tf
 import os
 import streamlit as st
 
+import os
+import tarfile
+import tensorflow as tf
+import requests
+
 st.set_page_config(
     page_title="ESP Gas Lock Detection",
     page_icon="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/SLB_Logo_2022.svg/640px-SLB_Logo_2022.svg.png",
@@ -112,18 +117,38 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
+    # Define the model path
+    model_dir = "saved_modelik1"
+    model_tar = "saved_modelik1.tar.gz"
+    model_url = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/saved_modelik1.tar.gz"
+    
+    # Check if model exists, otherwise download and extract it
+    if not os.path.exists(model_dir):
+        print("Downloading model...")
+        response = requests.get(model_url, stream=True)
+        with open(model_tar, "wb") as file:
+            for chunk in response.iter_content(chunk_size=8192):
+                file.write(chunk)
+    
+        print("Extracting model...")
+        with tarfile.open(model_tar, "r:gz") as tar:
+            tar.extractall()
+    
+    # Load the model
+    new_model = tf.keras.models.load_model(model_dir)
+
     #new_model = tf.keras.models.load_model('saved_modelik1/my_modelik1')
     # Get absolute path
-    model_path = os.path.join(os.path.dirname(__file__), "saved_modelik1", "my_modelik1")
+    #model_path = os.path.join(os.path.dirname(__file__), "saved_modelik1", "my_modelik1")
 
     # Debug print to check if the path exists
-    if os.path.exists(model_path):
-        print(f"✅ Model found at: {model_path}")
-    else:
-        raise FileNotFoundError(f"❌ Model NOT found at: {model_path}")
+    #if os.path.exists(model_path):
+        #print(f"✅ Model found at: {model_path}")
+    #else:
+        #raise FileNotFoundError(f"❌ Model NOT found at: {model_path}")
 
     # Load the model
-    new_model = tf.keras.models.load_model(model_path)
+    #new_model = tf.keras.models.load_model(model_path)
 
     #DATASET BARU
     def create_dataset(X, time_steps=1, step=1):

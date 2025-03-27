@@ -118,7 +118,7 @@ if result:
 
     #MODEL INITIALIZE
     # Define the model path
-    model_dir = "saved_modelik1"
+    model_dir = "saved_modelik1/my_modelik1"
     model_tar = "saved_modelik1.tar.gz"
     model_url = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/saved_modelik1.tar.gz"
     

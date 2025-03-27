@@ -117,23 +117,8 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
-    #Get the absolute path of the current script
-    #base_dir = os.path.dirname(os.path.abspath(__file__))
-    #model_path = os.path.join(base_dir, "my_model.h5")
-    
-    #Load the model
-    
-    model_dir = "saved_modelik2"
-
-    #Debug: Check if model directory exists
-    if not os.path.exists(model_dir):
-        raise FileNotFoundError(f"Model directory '{model_dir}' not found!")
-    
-    #Debug: List files inside the model directory
-    print("Model directory contents:", os.listdir(model_dir))
-    
-    #Load the model
-    new_model = tf.keras.models.load_model(model_dir)
+    model_path = r"C:\Users\lenovo\PycharmProjects\SLBMM\Streamlit\my_models.h5"  
+    new_model = tf.keras.models.load_model(model_path)
 
     #DATASET BARU
     def create_dataset(X, time_steps=1, step=1):

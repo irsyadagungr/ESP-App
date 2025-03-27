@@ -117,17 +117,13 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
-    model_dir = "saved_modelik2"
+    model_path = "my_model.h5"  # New model file
 
-    # Debug: Check if model directory exists
-    if not os.path.exists(model_dir):
-        raise FileNotFoundError(f"Model directory '{model_dir}' not found!")
+    if not os.path.exists(model_path):
+        raise FileNotFoundError(f"Model file '{model_path}' not found!")
     
-    # Debug: List files inside the model directory
-    print("Model directory contents:", os.listdir(model_dir))
-    
-    # Load the model
-    new_model = tf.keras.models.load_model(model_dir)
+    new_model = tf.keras.models.load_model(model_path)
+    #print("Model loaded successfully!")
 
 
     #new_model = tf.keras.models.load_model('saved_modelik1/my_modelik1')

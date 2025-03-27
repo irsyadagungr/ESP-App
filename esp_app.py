@@ -117,25 +117,18 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
-    # Define the model path
     model_dir = "saved_modelik1/my_modelik1"
-    model_tar = "saved_modelik1.tar.gz"
-    model_url = "https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/YOUR_REPO/main/saved_modelik1.tar.gz"
-    
-    # Check if model exists, otherwise download and extract it
+
+    # Debug: Check if model directory exists
     if not os.path.exists(model_dir):
-        print("Downloading model...")
-        response = requests.get(model_url, stream=True)
-        with open(model_tar, "wb") as file:
-            for chunk in response.iter_content(chunk_size=8192):
-                file.write(chunk)
+        raise FileNotFoundError(f"Model directory '{model_dir}' not found!")
     
-        print("Extracting model...")
-        with tarfile.open(model_tar, "r:gz") as tar:
-            tar.extractall()
+    # Debug: List files inside the model directory
+    print("Model directory contents:", os.listdir(model_dir))
     
     # Load the model
     new_model = tf.keras.models.load_model(model_dir)
+
 
     #new_model = tf.keras.models.load_model('saved_modelik1/my_modelik1')
     # Get absolute path

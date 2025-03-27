@@ -122,23 +122,7 @@ if result:
     #model_path = os.path.join(base_dir, "my_model.h5")
     
     #Load the model
-    #if os.path.exists(model_path):
-        #new_model = tf.keras.models.load_model(model_path)
-        #print("✅ Model loaded successfully in Streamlit!")
-    #else:
-        #raise FileNotFoundError(f"❌ Model file NOT found: {model_path}")
     
-    #model_path = "my_model.h5"  # New model file
-
-    #if not os.path.exists(model_path):
-        #raise FileNotFoundError(f"Model file '{model_path}' not found!")
-    
-    #new_model = tf.keras.models.load_model(model_path)
-    #print("Model loaded successfully!")
-
-
-    #new_model = tf.keras.models.load_model('saved_modelik1/my_modelik1')
-    #Get absolute path
     model_path = os.path.join(os.path.dirname(__file__), "saved_modelik1", "my_modelik1")
 
     Debug print to check if the path exists

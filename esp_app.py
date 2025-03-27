@@ -117,7 +117,7 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
-    model_path = r"C:\Users\lenovo\PycharmProjects\SLBMM\Streamlit\my_models.h5"  
+    model_path = "my_models.h5" 
     new_model = tf.keras.models.load_model(model_path)
 
     #DATASET BARU

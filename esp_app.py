@@ -75,7 +75,15 @@ if result:
     #Data Awal
     esp2 = esp.copy() #Penampil Waktu Box
     esp4 = esp2.copy()
-    esp.timestamp = pd.to_datetime(esp.timestamp)
+    #esp.timestamp = pd.to_datetime(esp.timestamp)
+
+    # Convert 'timestamp' column to datetime format, handling errors
+    esp["timestamp"] = pd.to_datetime(esp["timestamp"], errors="coerce")
+    
+    # Check for missing timestamps
+    if esp["timestamp"].isnull().sum() > 0:
+        print("Warning: Some timestamps could not be converted and are set to NaT")
+
 
     #Data Pembagian
     espn = esp2.iloc[0:1, :]

@@ -123,16 +123,17 @@ if result:
     
     #Load the model
     
-    model_path = os.path.join(os.path.dirname(__file__), "saved_modelik1", "my_modelik1")
+    model_dir = "saved_modelik2"
 
-    Debug print to check if the path exists
-    if os.path.exists(model_path):
-        print(f"✅ Model found at: {model_path}")
-    else:
-        raise FileNotFoundError(f"❌ Model NOT found at: {model_path}")
-
+    #Debug: Check if model directory exists
+    if not os.path.exists(model_dir):
+        raise FileNotFoundError(f"Model directory '{model_dir}' not found!")
+    
+    #Debug: List files inside the model directory
+    print("Model directory contents:", os.listdir(model_dir))
+    
     #Load the model
-    new_model = tf.keras.models.load_model(model_path)
+    new_model = tf.keras.models.load_model(model_dir)
 
     #DATASET BARU
     def create_dataset(X, time_steps=1, step=1):

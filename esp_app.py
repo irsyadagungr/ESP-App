@@ -121,8 +121,8 @@ if result:
     #model_path = "my_models.h5" 
     #new_model = tf.keras.models.load_model(model_path)
 
-    tf.keras.utils.get_custom_objects().update({"LSTM": LSTM})
-    model_path = "my_models.h5"
+    #tf.keras.utils.get_custom_objects().update({"LSTM": LSTM})
+    model_path = "my_models_fixed.h5"
     new_model = tf.keras.models.load_model(model_path)
 
     #DATASET BARU

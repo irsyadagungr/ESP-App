@@ -61,8 +61,8 @@ if uploaded_file is not None and result:
     espd = esp3.copy()
 else:
     #esp3 = pd.read_csv("espjanuari.csv")
-    #esp3 = pd.read_csv("esphelp1.csv")
-    esp3 = pd.read_csv(r"C:\Users\lenovo\PycharmProjects\SLBMM\Streamlit\esphelp1.csv")
+    esp3 = pd.read_csv("esphelp1.csv")
+    #esp3 = pd.read_csv(r"C:\Users\lenovo\PycharmProjects\SLBMM\Streamlit\esphelp1.csv")
     #bb = pd.read_csv("esppetang3.csv")
     esp = esp3.copy()
     espj = esp3.copy()
@@ -145,8 +145,8 @@ if result:
     
     for i in range(0, xx):
         #esp3 = pd.read_csv("espjanuari.csv")
-        #esp3 = pd.read_csv("esphelp1.csv")
-        esp3 = pd.read_csv(r"C:\Users\lenovo\PycharmProjects\SLBMM\Streamlit\esphelp1.csv")
+        esp3 = pd.read_csv("esphelp1.csv")
+        #esp3 = pd.read_csv(r"C:\Users\lenovo\PycharmProjects\SLBMM\Streamlit\esphelp1.csv")
         esp4 = esp3.iloc[0:b,:]
         espj = esp3.iloc[a:b,:]
         espjc = espj.copy()

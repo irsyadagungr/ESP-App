@@ -117,7 +117,7 @@ if result:
     placeholder = st.empty()
 
     #MODEL INITIALIZE
-    model_dir = "saved_modelik1/my_modelik1"
+    model_dir = "saved_modelik2"
 
     # Debug: Check if model directory exists
     if not os.path.exists(model_dir):

@@ -127,7 +127,7 @@ if result:
 
 
     #new_model = tf.keras.models.load_model('saved_modelik1/my_modelik1')
-    # Get absolute path
+    #Get absolute path
     #model_path = os.path.join(os.path.dirname(__file__), "saved_modelik1", "my_modelik1")
 
     # Debug print to check if the path exists

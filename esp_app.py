@@ -133,7 +133,7 @@ if result:
         return np.array(Xs)
     
 
-    # near real-time / live feed simulation
+    #near real-time / live feed simulation
     x = int(len(esp3)/11)
     xx = x
     a = 0; b = 11

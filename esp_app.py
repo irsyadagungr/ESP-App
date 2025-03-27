@@ -123,7 +123,7 @@ if result:
         raise FileNotFoundError(f"Model file '{model_path}' not found!")
     
     new_model = tf.keras.models.load_model(model_path)
-    #print("Model loaded successfully!")
+    print("Model loaded successfully!")
 
 
     #new_model = tf.keras.models.load_model('saved_modelik1/my_modelik1')

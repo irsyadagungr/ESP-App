@@ -678,13 +678,24 @@ if result:
                     st.markdown('### Intake Pressure(psi)')
                     fig = go.Figure()
 
+                    # ✅ Add traces
                     fig.add_trace(go.Scatter(
                         x=esp["timestamp"][h:m],
                         y=esp["Intake Pressure(psi)"][h:m],
-                        name="Intake Pressure(psi)", mode="lines", line_color="#98FFFD"
+                        name="Intake Pressure(psi)", mode="lines", line=dict(color="#98FFFD")
                     ))
+                    
+                    # ✅ Set layout (Fix `titlefont` issue)
+                    fig.update_layout(
+                        title="ESP Monitoring",
+                        xaxis_title="Timestamp",
+                        yaxis_title="Pressure (psi)",
+                    )
+                    
+                    # ✅ Use a unique key to avoid duplicate IDs
+                    st.plotly_chart(fig, use_container_width=True, key="esp_chart")
 
-                    st.write(fig)
+                    #st.write(fig)
 
                 st.markdown("### Detailed Data View")
                 #st.dataframe(esp2[h-1:m-1])

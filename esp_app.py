@@ -421,7 +421,7 @@ if result:
                     width=100000,
                 )
                 
-                st.write(fig)
+                st.plotly_chart(fig, use_container_width=True)
 
                 
                 # 3 COLUMNS 1
@@ -551,7 +551,7 @@ if result:
                         width=100000,
                     )
                     
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
 
                 with c2:
 
@@ -678,13 +678,13 @@ if result:
                         width=100000,
                     )
                     
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
                     
                     # Now try plotting
                     #st.plotly_chart(fig, use_container_width=True)
 
                     #st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
-                    #st.write(fig)
+                    #st.plotly_chart(fig, use_container_width=True)
                 
                 # 3 COLUMNS 1
                 # create three columns
@@ -699,7 +699,7 @@ if result:
                         name="Discharge Pressure(psi)", mode="lines", line_color="#FF00EE"
                     ))
 
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
 
                 with c2:
                     st.markdown('### Average Amps(Amps)')
@@ -711,7 +711,7 @@ if result:
                         name="Discharge Pressure(psi)", mode="lines", line_color="#AB5959"
                     ))
 
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
                 
                 with c3:
                     st.markdown('### Intake Temperature(F)')
@@ -723,7 +723,7 @@ if result:
                         name="Intake Temperature(F)", mode="lines", line_color="#060CBD"
                     ))
 
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
                 
                 # 3 COLUMNS 2
                 # create three columns
@@ -738,7 +738,7 @@ if result:
                         name="Drive Frequency(Hz)", mode="lines", line_color="#96A35C"
                     ))
 
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
 
                 with c2:
                     st.markdown('### Motor Temperature(F)')
@@ -750,7 +750,7 @@ if result:
                         name="Motor Temperature(F)", mode="lines", line_color="#006B33"
                     ))
 
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
                 
                 with c3:
                     st.markdown('### Intake Pressure(psi)')
@@ -762,7 +762,7 @@ if result:
                         name="Intake Pressure(psi)", mode="lines", line_color="#98FFFD"
                     ))
 
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)
 
                 st.markdown("### Detailed Data View")
                 #st.dataframe(esp2[h-1:m-1])

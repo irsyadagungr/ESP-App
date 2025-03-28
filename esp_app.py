@@ -201,7 +201,9 @@ if result:
         )
 
         #Encrypt
-        enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
+        #enc = OneHotEncoder(handle_unknown='ignore', sparse=False)
+        enc = OneHotEncoder(handle_unknown='ignore', sparse_output=False)
+
 
         X = np.asarray(X).astype(np.float32)
         #tf.convert_to_tensor(X, dtype=tf.float32)

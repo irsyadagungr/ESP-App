@@ -6,6 +6,7 @@ from plotly.subplots import make_subplots
 import datetime
 import numpy as np
 from ipywidgets import widgets
+import plotly.graph_objects as go
 
 import time  # to simulate a real time data, time loop
 
@@ -605,6 +606,8 @@ if result:
                         yaxis="y6", mode="lines", line_color="#98FFFD"
                     ))
 
+                    fig = go.Figure()
+                    
                     # Create axis objects
                     fig.update_layout(
                         xaxis=dict(domain=[0.075, 0.95]),

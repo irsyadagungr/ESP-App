@@ -614,89 +614,71 @@ if result:
                         autosize=False,
                         width=3000,
                         height=2500,
-                        
-                        # ✅ Fixed Y-Axis Formatting
+                    
+                        # Primary Y-axis
                         yaxis=dict(
-                            title=dict(  # ✅ Use `title=dict(font=...)`
-                                text="Your Y-Axis Title",
-                                font=dict(color="#FF00EE")  # ✅ Moved from `titlefont`
-                            ),
-                            tickfont=dict(color="#FF00EE")
+                            title=dict(text="Y Axis 1", font=dict(color="#FF00EE")),
+                            tickfont=dict(color="#FF00EE"),
                         ),
-                        
+                    
+                        # Secondary Y-axis
                         yaxis2=dict(
-                            title=dict(
-                                text="Your Y-Axis2 Title",
-                                font=dict(color="#AB5959")
-                            ),
+                            title=dict(text="Y Axis 2", font=dict(color="#AB5959")),
                             tickfont=dict(color="#AB5959"),
                             anchor="free",
                             overlaying="y",
                             side="left",
                             position=0.025
                         ),
-                        
+                    
+                        # Third Y-axis
                         yaxis3=dict(
-                            title=dict(
-                                text="Your Y-Axis3 Title",
-                                font=dict(color="#060CBD")
-                            ),
+                            title=dict(text="Y Axis 3", font=dict(color="#060CBD")),
                             tickfont=dict(color="#060CBD"),
                             anchor="free",
                             overlaying="y",
                             side="left",
                             position=0.045
                         ),
-                        
+                    
+                        # Fourth Y-axis
                         yaxis4=dict(
-                            title=dict(
-                                text="Your Y-Axis4 Title",
-                                font=dict(color="#96A35C")
-                            ),
+                            title=dict(text="Y Axis 4", font=dict(color="#96A35C")),
                             tickfont=dict(color="#96A35C"),
                             anchor="x",
                             overlaying="y",
                             side="right",
                         ),
-                        
+                    
+                        # Fifth Y-axis
                         yaxis5=dict(
-                            title=dict(
-                                text="Your Y-Axis5 Title",
-                                font=dict(color="#006B33")
-                            ),
+                            title=dict(text="Y Axis 5", font=dict(color="#006B33")),
                             tickfont=dict(color="#006B33"),
                             anchor="free",
                             overlaying="y",
                             side="right",
                             position=0.97
                         ),
-                        
+                    
+                        # Sixth Y-axis
                         yaxis6=dict(
-                            title=dict(
-                                text="Your Y-Axis6 Title",
-                                font=dict(color="#98FFFD")
-                            ),
+                            title=dict(text="Y Axis 6", font=dict(color="#98FFFD")),
                             tickfont=dict(color="#98FFFD"),
                             anchor="free",
                             overlaying="y",
                             side="right",
                             position=0.99
-                        )
-                    )
-                    
-                    # ✅ Set Main Title Correctly
-                    fig.update_layout(
-                        title=dict(
-                            text="Gas Lock Feature",
-                            font=dict(size=20)  # Adjust size if needed
                         ),
+                    )
+
+
+                    # Update layout properties
+                    fig.update_layout(
+                        title_text="Gas Lock Feature",
                         width=100000,
                     )
-
-
-                    # Debugging: Check if fig exists
-                    print(fig)  # Prints in the terminal
-                    st.write(fig)  # Shows output in Streamlit
+                    
+                    st.write(fig)
                     
                     # Now try plotting
                     #st.plotly_chart(fig, use_container_width=True)

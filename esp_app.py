@@ -699,7 +699,7 @@ if result:
                     st.write(fig)  # Shows output in Streamlit
                     
                     # Now try plotting
-                    st.plotly_chart(fig, use_container_width=True)
+                    #st.plotly_chart(fig, use_container_width=True)
 
                     #st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
                     #st.write(fig)

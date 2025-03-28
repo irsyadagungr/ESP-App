@@ -680,8 +680,8 @@ if result:
                         )
                     )
 
-
-                    st.write(fig)
+                    st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
+                    #st.write(fig)
                 
                 # 3 COLUMNS 1
                 # create three columns

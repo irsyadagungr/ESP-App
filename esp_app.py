@@ -122,8 +122,22 @@ if result:
     #new_model = tf.keras.models.load_model(model_path)
 
     #tf.keras.utils.get_custom_objects().update({"LSTM": LSTM})
+    #model_path = "my_models_fixed.h5"
+    #new_model = tf.keras.models.load_model(model_path)
+
+    # ✅ Define and register the custom LSTM
+    @tf.keras.utils.register_keras_serializable()
+    class CustomLSTM(LSTM):
+        pass  # No need to modify, just inherit
+    
+    # ✅ Register the class before loading the model
+    tf.keras.utils.get_custom_objects().update({"CustomLSTM": CustomLSTM})
+    
+    # ✅ Load the model
     model_path = "my_models_fixed.h5"
     new_model = tf.keras.models.load_model(model_path)
+    
+    print("✅ Model loaded successfully!")
 
     #DATASET BARU
     def create_dataset(X, time_steps=1, step=1):

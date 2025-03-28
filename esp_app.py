@@ -680,7 +680,14 @@ if result:
                         )
                     )
 
-                    st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
+                    # Debugging: Check if fig exists
+                    print(fig)  # Prints in the terminal
+                    st.write(fig)  # Shows output in Streamlit
+                    
+                    # Now try plotting
+                    st.plotly_chart(fig, use_container_width=True)
+
+                    #st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
                     #st.write(fig)
                 
                 # 3 COLUMNS 1

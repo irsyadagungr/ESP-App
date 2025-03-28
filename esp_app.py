@@ -128,7 +128,9 @@ if result:
     # ✅ Define and register the custom LSTM
     @tf.keras.utils.register_keras_serializable()
     class CustomLSTM(LSTM):
-        pass  # No need to modify, just inherit
+        def __init__(self, *args, time_major=False, **kwargs):  # Remove `time_major`
+            kwargs.pop("time_major", None)  # ✅ Remove the invalid argument
+            super().__init__(*args, **kwargs)  # ✅ Pass the rest to the original LSTM
     
     # ✅ Register the class before loading the model
     tf.keras.utils.get_custom_objects().update({"CustomLSTM": CustomLSTM})

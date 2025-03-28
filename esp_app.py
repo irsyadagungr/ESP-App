@@ -359,64 +359,59 @@ if result:
                 
                     # Primary Y-axis
                     yaxis=dict(
-                        title="Y Axis 1",
-                        titlefont=dict(color="#FF00EE"),
+                        title=dict(text="Y Axis 1", font=dict(color="#FF00EE")),
                         tickfont=dict(color="#FF00EE"),
                     ),
                 
-                    # Secondary Y-axis (overlaying first Y-axis)
+                    # Secondary Y-axis
                     yaxis2=dict(
-                        title="Y Axis 2",
-                        titlefont=dict(color="#AB5959"),
+                        title=dict(text="Y Axis 2", font=dict(color="#AB5959")),
                         tickfont=dict(color="#AB5959"),
-                        overlaying="y",  # This must overlay the first y-axis
+                        overlaying="y",
                         side="left",
-                        showgrid=False,  # Optional: Hide grid for clarity
-                        zeroline=False,  # Optional: Remove zero line
+                        showgrid=False,
+                        zeroline=False,
                     ),
                 
-                    # Third Y-axis (corrected overlaying and anchor)
+                    # Third Y-axis
                     yaxis3=dict(
-                        title="Y Axis 3",
-                        titlefont=dict(color="#060CBD"),
+                        title=dict(text="Y Axis 3", font=dict(color="#060CBD")),
                         tickfont=dict(color="#060CBD"),
                         overlaying="y",
                         side="left",
                         showgrid=False,
-                        position=0.045  # Adjust as needed
+                        position=0.045
                     ),
                 
-                    # Fourth Y-axis (placed on right)
+                    # Fourth Y-axis
                     yaxis4=dict(
-                        title="Y Axis 4",
-                        titlefont=dict(color="#96A35C"),
+                        title=dict(text="Y Axis 4", font=dict(color="#96A35C")),
                         tickfont=dict(color="#96A35C"),
                         overlaying="y",
                         side="right",
                     ),
                 
-                    # Fifth Y-axis (correct anchor)
+                    # Fifth Y-axis
                     yaxis5=dict(
-                        title="Y Axis 5",
-                        titlefont=dict(color="#006B33"),
+                        title=dict(text="Y Axis 5", font=dict(color="#006B33")),
                         tickfont=dict(color="#006B33"),
                         overlaying="y",
                         side="right",
                         position=0.97
                     ),
                 
-                    # Sixth Y-axis (correct overlaying)
+                    # Sixth Y-axis
                     yaxis6=dict(
-                        title="Y Axis 6",
-                        titlefont=dict(color="#98FFFD"),
+                        title=dict(text="Y Axis 6", font=dict(color="#98FFFD")),
                         tickfont=dict(color="#98FFFD"),
                         overlaying="y",
                         side="right",
                         position=0.99
                     ),
                 
-                    legend=dict(x=1.05, y=1),  # Adjust legend position
+                    legend=dict(x=1.05, y=1),
                 )
+
 
 
                 # Update layout properties

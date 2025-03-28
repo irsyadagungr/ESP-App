@@ -607,22 +607,23 @@ if result:
 
                     # Create axis objects
                     fig.update_layout(
-                        xaxis=dict(
-                            domain=[0.075, 0.95]
-                        ),
+                        xaxis=dict(domain=[0.075, 0.95]),
                         autosize=False,
                         width=3000,
                         height=2500,
+                        
+                        # ✅ Fixed Y-Axis Formatting
                         yaxis=dict(
-                            title=dict(  # ✅ Fix: Use "title" instead of "titlefont"
-                                text="Y-Axis 1",  # Add a title if needed
-                                font=dict(color="#FF00EE")  # ✅ Fix: Use "font" instead of "titlefont"
+                            title=dict(  # ✅ Use `title=dict(font=...)`
+                                text="Your Y-Axis Title",
+                                font=dict(color="#FF00EE")  # ✅ Moved from `titlefont`
                             ),
                             tickfont=dict(color="#FF00EE")
                         ),
+                        
                         yaxis2=dict(
                             title=dict(
-                                text="Y-Axis 2",
+                                text="Your Y-Axis2 Title",
                                 font=dict(color="#AB5959")
                             ),
                             tickfont=dict(color="#AB5959"),
@@ -631,9 +632,10 @@ if result:
                             side="left",
                             position=0.025
                         ),
+                        
                         yaxis3=dict(
                             title=dict(
-                                text="Y-Axis 3",
+                                text="Your Y-Axis3 Title",
                                 font=dict(color="#060CBD")
                             ),
                             tickfont=dict(color="#060CBD"),
@@ -642,9 +644,10 @@ if result:
                             side="left",
                             position=0.045
                         ),
+                        
                         yaxis4=dict(
                             title=dict(
-                                text="Y-Axis 4",
+                                text="Your Y-Axis4 Title",
                                 font=dict(color="#96A35C")
                             ),
                             tickfont=dict(color="#96A35C"),
@@ -652,9 +655,10 @@ if result:
                             overlaying="y",
                             side="right",
                         ),
+                        
                         yaxis5=dict(
                             title=dict(
-                                text="Y-Axis 5",
+                                text="Your Y-Axis5 Title",
                                 font=dict(color="#006B33")
                             ),
                             tickfont=dict(color="#006B33"),
@@ -663,9 +667,10 @@ if result:
                             side="right",
                             position=0.97
                         ),
+                        
                         yaxis6=dict(
                             title=dict(
-                                text="Y-Axis 6",
+                                text="Your Y-Axis6 Title",
                                 font=dict(color="#98FFFD")
                             ),
                             tickfont=dict(color="#98FFFD"),
@@ -673,12 +678,18 @@ if result:
                             overlaying="y",
                             side="right",
                             position=0.99
-                        ),
-                        title=dict(  # ✅ Fix: Use "title" instead of "title_text"
-                            text="Gas Lock Feature",
-                            font=dict(size=20)  # Optional: Customize title font size
                         )
                     )
+                    
+                    # ✅ Set Main Title Correctly
+                    fig.update_layout(
+                        title=dict(
+                            text="Gas Lock Feature",
+                            font=dict(size=20)  # Adjust size if needed
+                        ),
+                        width=100000,
+                    )
+
 
                     # Debugging: Check if fig exists
                     print(fig)  # Prints in the terminal

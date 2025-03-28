@@ -606,7 +606,85 @@ if result:
                         yaxis="y6", mode="lines", line_color="#98FFFD"
                     ))
 
-                   
+                   fig = go.Figure()
+                    
+                    # Create axis objects
+                    fig.update_layout(
+                        xaxis=dict(domain=[0.075, 0.95]),
+                        autosize=False,
+                        width=3000,
+                        height=2500,
+                    
+                        # Primary Y-axis
+                        yaxis=dict(
+                            title=dict(text="Y Axis 1", font=dict(color="#FF00EE")),
+                            tickfont=dict(color="#FF00EE"),
+                        ),
+                    
+                        # Secondary Y-axis
+                        yaxis2=dict(
+                            title=dict(text="Y Axis 2", font=dict(color="#AB5959")),
+                            tickfont=dict(color="#AB5959"),
+                            anchor="free",
+                            overlaying="y",
+                            side="left",
+                            position=0.025
+                        ),
+                    
+                        # Third Y-axis
+                        yaxis3=dict(
+                            title=dict(text="Y Axis 3", font=dict(color="#060CBD")),
+                            tickfont=dict(color="#060CBD"),
+                            anchor="free",
+                            overlaying="y",
+                            side="left",
+                            position=0.045
+                        ),
+                    
+                        # Fourth Y-axis
+                        yaxis4=dict(
+                            title=dict(text="Y Axis 4", font=dict(color="#96A35C")),
+                            tickfont=dict(color="#96A35C"),
+                            anchor="x",
+                            overlaying="y",
+                            side="right",
+                        ),
+                    
+                        # Fifth Y-axis
+                        yaxis5=dict(
+                            title=dict(text="Y Axis 5", font=dict(color="#006B33")),
+                            tickfont=dict(color="#006B33"),
+                            anchor="free",
+                            overlaying="y",
+                            side="right",
+                            position=0.97
+                        ),
+                    
+                        # Sixth Y-axis
+                        yaxis6=dict(
+                            title=dict(text="Y Axis 6", font=dict(color="#98FFFD")),
+                            tickfont=dict(color="#98FFFD"),
+                            anchor="free",
+                            overlaying="y",
+                            side="right",
+                            position=0.99
+                        ),
+                    )
+
+
+                    # Update layout properties
+                    fig.update_layout(
+                        title_text="Gas Lock Feature",
+                        width=100000,
+                    )
+                    
+                    st.write(fig)
+                    
+                    # Now try plotting
+                    #st.plotly_chart(fig, use_container_width=True)
+
+                    #st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
+                    #st.write(fig)
                 
                 # 3 COLUMNS 1
                 # create three columns
@@ -678,24 +756,13 @@ if result:
                     st.markdown('### Intake Pressure(psi)')
                     fig = go.Figure()
 
-                    # ✅ Add traces
                     fig.add_trace(go.Scatter(
                         x=esp["timestamp"][h:m],
                         y=esp["Intake Pressure(psi)"][h:m],
-                        name="Intake Pressure(psi)", mode="lines", line=dict(color="#98FFFD")
+                        name="Intake Pressure(psi)", mode="lines", line_color="#98FFFD"
                     ))
-                    
-                    # ✅ Set layout (Fix `titlefont` issue)
-                    fig.update_layout(
-                        title="ESP Monitoring",
-                        xaxis_title="Timestamp",
-                        yaxis_title="Pressure (psi)",
-                    )
-                    
-                    # ✅ Use a unique key to avoid duplicate IDs
-                    st.plotly_chart(fig, use_container_width=True, key="esp_chart")
 
-                    #st.write(fig)
+                    st.write(fig)
 
                 st.markdown("### Detailed Data View")
                 #st.dataframe(esp2[h-1:m-1])

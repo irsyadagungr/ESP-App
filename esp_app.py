@@ -606,7 +606,7 @@ if result:
                         yaxis="y6", mode="lines", line_color="#98FFFD"
                     ))
 
-                   fig = go.Figure()
+                   #fig = go.Figure()
                     
                     # Create axis objects
                     fig.update_layout(

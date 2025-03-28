@@ -245,77 +245,531 @@ if result:
         
         #espt = pd.concat(espt, espjc)
         
-        num_data = 100
-        timestamps = pd.date_range(start="2024-03-27 00:00:00", periods=num_data, freq="T")
-        esp = pd.DataFrame({
-            "timestamp": timestamps,
-            "Discharge Pressure(psi)": np.random.randint(1000, 3000, num_data),
-            "Average Amps(Amps)": np.random.randint(50, 150, num_data),
-            "Intake Temperature(F)": np.random.randint(80, 120, num_data),
-            "Drive Frequency(Hz)": np.random.randint(30, 60, num_data),
-            "Motor Temperature(F)": np.random.randint(100, 200, num_data),
-            "Intake Pressure(psi)": np.random.randint(50, 150, num_data)
-        })
-        
-        # Initialize session state variables
-        if "index" not in st.session_state:
-            st.session_state.index = 0
-        
-        st.title("Real-Time ESP Monitoring")
-        
-        placeholder = st.empty()
-        
-        while True:
-            m = st.session_state.index
-        
-            if m >= len(esp):
-                st.session_state.index = 0  # Restart data loop
-                continue
-        
+        for seconds in range(11):
+            #h += 1
+            m += 1
+
             with placeholder.container():
-                st.markdown("### ESP Live Data")
-        
-                # Display KPIs
-                col1, col2 = st.columns(2)
-                col1.metric("Timestamp", esp["timestamp"][m])
-                col2.metric("State", "Normal" if np.random.rand() > 0.5 else "Gas Lock Detected")  # Simulated state
-        
-                # Three KPI metrics
+                
+                kpi1, kpi2 = st.columns(2)
+                kpi1.metric(
+                    label="Timestamp",
+                    value=esp2["timestamp"][m]
+                )
+
+                kpi2.metric(
+                    label="State",
+                    value=espjc["State"][q]
+                )
+                
+                # create three columns
                 kpi1, kpi2, kpi3 = st.columns(3)
-                kpi1.metric("Discharge Pressure (psi)", esp["Discharge Pressure(psi)"][m])
-                kpi2.metric("Average Amps (Amp)", esp["Average Amps(Amps)"][m])
-                kpi3.metric("Intake Temperature (F)", esp["Intake Temperature(F)"][m])
-        
-                # Additional KPIs
+
+                # fill in those three columns with respective metrics or KPIs
+                kpi1.metric(
+                    label="Discharge Pressure (psi)",
+                    value=int(esp["Discharge Pressure(psi)"][m]),
+                    delta=esp["Discharge Pressure(psi)"][m] - esp["Discharge Pressure(psi)"][m-1],
+                )
+                
+                kpi2.metric(
+                    label="Average Amps (Amp)",
+                    value=int(esp["Average Amps(Amps)"][m]),
+                    delta=esp["Average Amps(Amps)"][m] - esp["Average Amps(Amps)"][m-1],
+                )
+                
+                kpi3.metric(
+                    label="Intake Temperature(F)",
+                    value=int(esp["Intake Temperature(F)"][m]),
+                    delta=esp["Intake Temperature(F)"][m] - esp["Intake Temperature(F)"][m-1],
+                )
+
+                # create three columns
                 kpi1, kpi2, kpi3 = st.columns(3)
-                kpi1.metric("Drive Frequency (Hz)", esp["Drive Frequency(Hz)"][m])
-                kpi2.metric("Motor Temperature (F)", esp["Motor Temperature(F)"][m])
-                kpi3.metric("Intake Pressure (psi)", esp["Intake Pressure(psi)"][m])
-        
-                # Line Chart for ESP Data
-                st.markdown("### ESP Data Trends")
+
+                # fill in those three columns with respective metrics or KPIs
+                kpi1.metric(
+                    label="Drive Frequency(Hz)",
+                    value=int(esp["Drive Frequency(Hz)"][m]),
+                    delta=esp["Drive Frequency(Hz)"][m] - esp["Drive Frequency(Hz)"][m-1],
+                )
+                
+                kpi2.metric(
+                    label="Motor Temperature(F)",
+                    value=int(esp["Motor Temperature(F)"][m]),
+                    delta=esp["Motor Temperature(F)"][m] - esp["Motor Temperature(F)"][m-1],
+                )
+                
+                kpi3.metric(
+                    label="Intake Pressure(psi)",
+                    value=int(esp["Intake Pressure(psi)"][m]),
+                    delta=esp["Intake Pressure(psi)"][m] - esp["Intake Pressure(psi)"][m-1],
+                )
+                
+                #GRAPH FULL
+                st.markdown("# ESP DATA")
                 fig = go.Figure()
-        
-                fig.add_trace(go.Scatter(x=esp["timestamp"][:m], y=esp["Discharge Pressure(psi)"][:m],
-                                         mode="lines", name="Discharge Pressure", line_color="blue"))
-        
-                fig.add_trace(go.Scatter(x=esp["timestamp"][:m], y=esp["Average Amps(Amps)"][:m],
-                                         mode="lines", name="Average Amps", line_color="red"))
-        
-                fig.add_trace(go.Scatter(x=esp["timestamp"][:m], y=esp["Intake Temperature(F)"][:m],
-                                         mode="lines", name="Intake Temperature", line_color="green"))
-        
-                st.plotly_chart(fig, use_container_width=True)
-        
-                # Data Table
-                st.markdown("### Data Table")
-                st.dataframe(esp.iloc[:m])
-        
-            # Increment session state index
-            st.session_state.index += 1
-        
-            # Sleep for real-time effect
-            time.sleep(1)
+
+                fig.add_trace(go.Scatter(
+                    x=esp["timestamp"][h-1:m-1],
+                    y=esp["Discharge Pressure(psi)"][h-1:m-1],
+                    name="Discharge Pressure(psi)", mode="lines", line_color="#FF00EE"
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=esp["timestamp"][h-1:m-1],
+                    y=esp["Average Amps(Amps)"][h-1:m-1],
+                    name="Average Amps(Amps)",
+                    yaxis="y2", mode="lines", line_color="#AB5959"
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=esp["timestamp"][h-1:m-1],
+                    y=esp["Intake Temperature(F)"][h-1:m-1],
+                    name="Intake Temperature(F)",
+                    yaxis="y3", mode="lines", line_color="#060CBD"
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=esp["timestamp"][h-1:m-1],
+                    y=esp["Drive Frequency(Hz)"][h-1:m-1],
+                    name="Drive Frequency(Hz)",
+                    yaxis="y4", mode="lines", line_color="#96A35C"
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=esp["timestamp"][h-1:m-1],
+                    y=esp["Motor Temperature(F)"][h-1:m-1],
+                    name="Motor Temperature(F)",
+                    yaxis="y5", mode="lines", line_color="#006B33"
+                ))
+
+                fig.add_trace(go.Scatter(
+                    x=esp["timestamp"][h-1:m-1],
+                    y=esp["Intake Pressure(psi)"][h-1:m-1],
+                    name="Intake Pressure(psi)",
+                    yaxis="y6", mode="lines", line_color="#98FFFD"
+                ))
+
+                # Create axis objects
+                fig.update_layout(
+                    xaxis=dict(domain=[0.075, 0.95]),
+                    autosize=False,
+                    width=3000,
+                    height=2500,
+                
+                    # Primary Y-axis
+                    yaxis=dict(
+                        title=dict(text="Y Axis 1", font=dict(color="#FF00EE")),
+                        tickfont=dict(color="#FF00EE"),
+                    ),
+                
+                    # Secondary Y-axis
+                    yaxis2=dict(
+                        title=dict(text="Y Axis 2", font=dict(color="#AB5959")),
+                        tickfont=dict(color="#AB5959"),
+                        overlaying="y",
+                        side="left",
+                        showgrid=False,
+                        zeroline=False,
+                    ),
+                
+                    # Third Y-axis
+                    yaxis3=dict(
+                        title=dict(text="Y Axis 3", font=dict(color="#060CBD")),
+                        tickfont=dict(color="#060CBD"),
+                        overlaying="y",
+                        side="left",
+                        showgrid=False,
+                        position=0.045
+                    ),
+                
+                    # Fourth Y-axis
+                    yaxis4=dict(
+                        title=dict(text="Y Axis 4", font=dict(color="#96A35C")),
+                        tickfont=dict(color="#96A35C"),
+                        overlaying="y",
+                        side="right",
+                    ),
+                
+                    # Fifth Y-axis
+                    yaxis5=dict(
+                        title=dict(text="Y Axis 5", font=dict(color="#006B33")),
+                        tickfont=dict(color="#006B33"),
+                        overlaying="y",
+                        side="right",
+                        position=0.97
+                    ),
+                
+                    # Sixth Y-axis
+                    yaxis6=dict(
+                        title=dict(text="Y Axis 6", font=dict(color="#98FFFD")),
+                        tickfont=dict(color="#98FFFD"),
+                        overlaying="y",
+                        side="right",
+                        position=0.99
+                    ),
+                
+                    legend=dict(x=1.05, y=1),
+                )
+
+
+
+                # Update layout properties
+                fig.update_layout(
+                    title_text="Gas Lock Feature",
+                    width=100000,
+                )
+                
+                st.write(fig)
+
+                
+                # 3 COLUMNS 1
+                # create three columns
+                c1, c2= st.columns((10/2, 10/2))
+
+                with c1:
+
+                    #GRAPH FULL 2
+                    st.markdown("# NORMAL")
+                    fig = go.Figure()
+
+                    #if espjc["State"][q] == "Gas Lock Detected":
+
+                    if espjc["State"][q] == "Normal Condition":
+                        e += 1
+                        print(espn)
+
+                    fig.add_trace(go.Scatter(
+                        x=espn["timestamp"][d:e],
+                        y=espn["Discharge Pressure(psi)"][d:e],
+                        name="Discharge Pressure(psi)", mode="lines", line_color="#FF00EE"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espn["timestamp"][d:e],
+                        y=espn["Average Amps(Amps)"][d:e],
+                        name="Average Amps(Amps)",
+                        yaxis="y2", mode="lines", line_color="#AB5959"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espn["timestamp"][d:e],
+                        y=espn["Intake Temperature(F)"][d:e],
+                        name="Intake Temperature(F)",
+                        yaxis="y3", mode="lines", line_color="#060CBD"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espn["timestamp"][d:e],
+                        y=espn["Drive Frequency(Hz)"][d:e],
+                        name="Drive Frequency(Hz)",
+                        yaxis="y4", mode="lines", line_color="#96A35C"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espn["timestamp"][d:e],
+                        y=espn["Motor Temperature(F)"][d:e],
+                        name="Motor Temperature(F)",
+                        yaxis="y5", mode="lines", line_color="#006B33"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espn["timestamp"][d:e],
+                        y=espn["Intake Pressure(psi)"][d:e],
+                        name="Intake Pressure(psi)",
+                        yaxis="y6", mode="lines", line_color="#98FFFD"
+                    ))
+
+                    # Create axis objects
+                    fig.update_layout(
+                        xaxis=dict(domain=[0.075, 0.95]),
+                        autosize=False,
+                        width=3000,
+                        height=2500,
+                    
+                        # Primary Y-axis
+                        yaxis=dict(
+                            title=dict(text="Y Axis 1", font=dict(color="#FF00EE")),
+                            tickfont=dict(color="#FF00EE"),
+                        ),
+                    
+                        # Secondary Y-axis
+                        yaxis2=dict(
+                            title=dict(text="Y Axis 2", font=dict(color="#AB5959")),
+                            tickfont=dict(color="#AB5959"),
+                            anchor="free",
+                            overlaying="y",
+                            side="left",
+                            position=0.025
+                        ),
+                    
+                        # Third Y-axis
+                        yaxis3=dict(
+                            title=dict(text="Y Axis 3", font=dict(color="#060CBD")),
+                            tickfont=dict(color="#060CBD"),
+                            anchor="free",
+                            overlaying="y",
+                            side="left",
+                            position=0.045
+                        ),
+                    
+                        # Fourth Y-axis
+                        yaxis4=dict(
+                            title=dict(text="Y Axis 4", font=dict(color="#96A35C")),
+                            tickfont=dict(color="#96A35C"),
+                            anchor="x",
+                            overlaying="y",
+                            side="right",
+                        ),
+                    
+                        # Fifth Y-axis
+                        yaxis5=dict(
+                            title=dict(text="Y Axis 5", font=dict(color="#006B33")),
+                            tickfont=dict(color="#006B33"),
+                            anchor="free",
+                            overlaying="y",
+                            side="right",
+                            position=0.97
+                        ),
+                    
+                        # Sixth Y-axis
+                        yaxis6=dict(
+                            title=dict(text="Y Axis 6", font=dict(color="#98FFFD")),
+                            tickfont=dict(color="#98FFFD"),
+                            anchor="free",
+                            overlaying="y",
+                            side="right",
+                            position=0.99
+                        ),
+                    )
+
+
+                    # Update layout properties
+                    fig.update_layout(
+                        title_text="Gas Lock Feature",
+                        width=100000,
+                    )
+                    
+                    st.write(fig)
+
+                with c2:
+
+                    #GRAPH FULL 3
+                    st.markdown("# GAS LOCK")
+                    fig = go.Figure()
+
+                    #if espjc["State"][q] == "Gas Lock Detected":
+
+                    if espjc["State"][q] == "Gas Lock Detected":
+                        f += 1
+                        print(espg)
+
+                    fig.add_trace(go.Scatter(
+                        x=espg["timestamp"][d:e],
+                        y=espg["Discharge Pressure(psi)"][d:e],
+                        name="Discharge Pressure(psi)", mode="lines", line_color="#FF00EE"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espg["timestamp"][d:e],
+                        y=espg["Average Amps(Amps)"][d:e],
+                        name="Average Amps(Amps)",
+                        yaxis="y2", mode="lines", line_color="#AB5959"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espg["timestamp"][d:e],
+                        y=espg["Intake Temperature(F)"][d:e],
+                        name="Intake Temperature(F)",
+                        yaxis="y3", mode="lines", line_color="#060CBD"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espg["timestamp"][d:e],
+                        y=espg["Drive Frequency(Hz)"][d:e],
+                        name="Drive Frequency(Hz)",
+                        yaxis="y4", mode="lines", line_color="#96A35C"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espg["timestamp"][d:e],
+                        y=espg["Motor Temperature(F)"][d:e],
+                        name="Motor Temperature(F)",
+                        yaxis="y5", mode="lines", line_color="#006B33"
+                    ))
+
+                    fig.add_trace(go.Scatter(
+                        x=espg["timestamp"][d:e],
+                        y=espg["Intake Pressure(psi)"][d:e],
+                        name="Intake Pressure(psi)",
+                        yaxis="y6", mode="lines", line_color="#98FFFD"
+                    ))
+
+                   #fig = go.Figure()
+                    
+                    # Create axis objects
+                    fig.update_layout(
+                        xaxis=dict(domain=[0.075, 0.95]),
+                        autosize=False,
+                        width=3000,
+                        height=2500,
+                    
+                        # Primary Y-axis
+                        yaxis=dict(
+                            title=dict(text="Y Axis 1", font=dict(color="#FF00EE")),
+                            tickfont=dict(color="#FF00EE"),
+                        ),
+                    
+                        # Secondary Y-axis
+                        yaxis2=dict(
+                            title=dict(text="Y Axis 2", font=dict(color="#AB5959")),
+                            tickfont=dict(color="#AB5959"),
+                            anchor="free",
+                            overlaying="y",
+                            side="left",
+                            position=0.025
+                        ),
+                    
+                        # Third Y-axis
+                        yaxis3=dict(
+                            title=dict(text="Y Axis 3", font=dict(color="#060CBD")),
+                            tickfont=dict(color="#060CBD"),
+                            anchor="free",
+                            overlaying="y",
+                            side="left",
+                            position=0.045
+                        ),
+                    
+                        # Fourth Y-axis
+                        yaxis4=dict(
+                            title=dict(text="Y Axis 4", font=dict(color="#96A35C")),
+                            tickfont=dict(color="#96A35C"),
+                            anchor="x",
+                            overlaying="y",
+                            side="right",
+                        ),
+                    
+                        # Fifth Y-axis
+                        yaxis5=dict(
+                            title=dict(text="Y Axis 5", font=dict(color="#006B33")),
+                            tickfont=dict(color="#006B33"),
+                            anchor="free",
+                            overlaying="y",
+                            side="right",
+                            position=0.97
+                        ),
+                    
+                        # Sixth Y-axis
+                        yaxis6=dict(
+                            title=dict(text="Y Axis 6", font=dict(color="#98FFFD")),
+                            tickfont=dict(color="#98FFFD"),
+                            anchor="free",
+                            overlaying="y",
+                            side="right",
+                            position=0.99
+                        ),
+                    )
+
+
+                    # Update layout properties
+                    fig.update_layout(
+                        title_text="Gas Lock Feature",
+                        width=100000,
+                    )
+                    
+                    st.write(fig)
+                    
+                    # Now try plotting
+                    #st.plotly_chart(fig, use_container_width=True)
+
+                    #st.plotly_chart(fig, use_container_width=True)  # ✅ Correct way to display Plotly in Streamlit
+                    #st.write(fig)
+                
+                # 3 COLUMNS 1
+                # create three columns
+                c1, c2, c3 = st.columns((10/3, 10/3, 10/3))
+                with c1:
+                    st.markdown('### Disch Pressure(psi)')
+                    fig = go.Figure()
+
+                    fig.add_trace(go.Scatter(
+                        x=esp["timestamp"][h:m],
+                        y=esp["Discharge Pressure(psi)"][h:m],
+                        name="Discharge Pressure(psi)", mode="lines", line_color="#FF00EE"
+                    ))
+
+                    st.write(fig)
+
+                with c2:
+                    st.markdown('### Average Amps(Amps)')
+                    fig = go.Figure()
+
+                    fig.add_trace(go.Scatter(
+                        x=esp["timestamp"][h:m],
+                        y=esp["Average Amps(Amps)"][h:m],
+                        name="Discharge Pressure(psi)", mode="lines", line_color="#AB5959"
+                    ))
+
+                    st.write(fig)
+                
+                with c3:
+                    st.markdown('### Intake Temperature(F)')
+                    fig = go.Figure()
+
+                    fig.add_trace(go.Scatter(
+                        x=esp["timestamp"][h:m],
+                        y=esp["Intake Temperature(F)"][h:m],
+                        name="Intake Temperature(F)", mode="lines", line_color="#060CBD"
+                    ))
+
+                    st.write(fig)
+                
+                # 3 COLUMNS 2
+                # create three columns
+                c1, c2, c3 = st.columns((10/3, 10/3, 10/3))
+                with c1:
+                    st.markdown('### Drive Frequency(Hz)')
+                    fig = go.Figure()
+
+                    fig.add_trace(go.Scatter(
+                        x=esp["timestamp"][h:m],
+                        y=esp["Drive Frequency(Hz)"][h:m],
+                        name="Drive Frequency(Hz)", mode="lines", line_color="#96A35C"
+                    ))
+
+                    st.write(fig)
+
+                with c2:
+                    st.markdown('### Motor Temperature(F)')
+                    fig = go.Figure()
+
+                    fig.add_trace(go.Scatter(
+                        x=esp["timestamp"][h:m],
+                        y=esp["Motor Temperature(F)"][h:m],
+                        name="Motor Temperature(F)", mode="lines", line_color="#006B33"
+                    ))
+
+                    st.write(fig)
+                
+                with c3:
+                    st.markdown('### Intake Pressure(psi)')
+                    fig = go.Figure()
+
+                    fig.add_trace(go.Scatter(
+                        x=esp["timestamp"][h:m],
+                        y=esp["Intake Pressure(psi)"][h:m],
+                        name="Intake Pressure(psi)", mode="lines", line_color="#98FFFD"
+                    ))
+
+                    st.write(fig)
+
+                st.markdown("### Detailed Data View")
+                #st.dataframe(esp2[h-1:m-1])
+                st.dataframe(esp4[h-1:m-1])
+                time.sleep(0.1)
+
+            q += 1
 
         a+=11; b+=11
     
